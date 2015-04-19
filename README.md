@@ -2,7 +2,7 @@
 
 This repository has the Dockerfile for source build of gcc 6 (experimental).
 
-Currently gcc 6 ß is required to run many Fortran 2003/2008 programs successfully due
+Currently gcc 6 is required to run many Fortran 2003/2008 programs successfully due
 to bugs in earlier versions. Also includes standard openmpi and lapack libraries.
 
 Corresponding auto-build docker available at 

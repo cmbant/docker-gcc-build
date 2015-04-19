@@ -15,4 +15,5 @@ RUN git clone git://gcc.gnu.org/git/gcc.git --branch vehre/head_cosmo --single-b
  && make -j"$(nproc)" \
  && sudo make install \
  && make distclean \
- && sed -i '1s/^/\/usr\/local\/lib64\n/' /etc/ld.so.conf
+ && sed -i '1s/^/\/usr\/local\/lib64\n/' /etc/ld.so.conf \
+ && ldconfig
