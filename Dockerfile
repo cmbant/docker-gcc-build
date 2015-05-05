@@ -11,7 +11,7 @@ RUN git clone git://gcc.gnu.org/git/gcc.git --branch vehre/head_cosmo --single-b
  && mkdir objdir \
  && cd objdir \
  && ../configure --enable-languages=c,c++,fortran --disable-multilib \
-    --disable-bootstrap --enable-checking=release --build=x86_64-linux-gnu \
+    --disable-bootstrap --build=x86_64-linux-gnu \
  && make -j"$(nproc)" \
  && sudo make install \
  && make distclean \
