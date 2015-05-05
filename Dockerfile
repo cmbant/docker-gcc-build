@@ -7,7 +7,6 @@ RUN apt-get install -y liblapack-dev libopenblas-dev openmpi-bin libopenmpi-dev
 ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/vehre/head_cosmo gcc_shortlog
 
 RUN git clone git://gcc.gnu.org/git/gcc.git --branch vehre/head_cosmo --single-branch --depth=1 \
- && pushd \
  && cd gcc \
  && mkdir objdir \
  && cd objdir \
@@ -16,7 +15,7 @@ RUN git clone git://gcc.gnu.org/git/gcc.git --branch vehre/head_cosmo --single-b
  && make -j"$(nproc)" \
  && sudo make install \
  && make distclean \
- && popd \
+ && cd ../.. \
  && rm -rf ./gcc \
  && sed -i '1s/^/\/usr\/local\/lib64\n/' /etc/ld.so.conf \
  && ldconfig
