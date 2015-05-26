@@ -22,7 +22,7 @@ RUN buildDeps='bison flex libmpc-dev g++ ' \
  && ../configure --enable-languages=c,c++,fortran --disable-multilib \
     --disable-bootstrap --build=x86_64-linux-gnu \
  && make -j"$(nproc)" \
- && sudo make install \
+ && make install \
  && make distclean \
  && cd ../.. \
  && rm -rf ./gcc \
