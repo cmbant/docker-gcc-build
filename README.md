@@ -6,8 +6,9 @@ Currently gcc 6 is required to run many Fortran 2003/2008 programs successfully 
 to bugs in earlier versions. Also includes standard openmpi and lapack libraries,
 plus basic build tools.
 
-Corresponding auto-build docker available at
-https://registry.hub.docker.com/u/cmbant/docker-gcc-build/
+GitHub: http://registry.hub.docker.com/u/cmbant/docker-gcc-build/
+DockerHub: http://registry.hub.docker.com/u/cmbant/docker-gcc-build/
+
 
 ### Usage
 
