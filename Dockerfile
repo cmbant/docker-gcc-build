@@ -11,11 +11,11 @@ RUN apt-get update && apt-get install -y \
      libopenmpi-dev \
  && apt-get clean
 
-ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/vehre/head_cosmo gcc_shortlog
+ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/master gcc_shortlog
 
 RUN buildDeps='bison flex libmpc-dev g++ ' \
  && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
- && git clone git://gcc.gnu.org/git/gcc.git --branch vehre/head_cosmo --single-branch --depth=1 \
+ && git clone git://gcc.gnu.org/git/gcc.git --branch master --single-branch --depth=1 \
  && cd gcc \
  && mkdir objdir \
  && cd objdir \
