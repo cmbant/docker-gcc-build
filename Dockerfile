@@ -18,7 +18,8 @@ RUN buildDeps='bison flex libmpc-dev g++ ' \
  && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
  && wget https://codeload.github.com/gcc-mirror/gcc/zip/gcc-6-branch \
  && unzip gcc-6-branch \
- && cd gcc-6-branch \
+ && rm -f gcc-6-branch \
+ && cd gcc-gcc-6-branch \
  && mkdir objdir \
  && cd objdir \
  && ../configure --enable-languages=c,c++,fortran --disable-multilib \
@@ -27,7 +28,7 @@ RUN buildDeps='bison flex libmpc-dev g++ ' \
  && make install \
  && make distclean \
  && cd ../.. \
- && rm -rf ./gcc-6-branch \
+ && rm -rf ./gcc-gcc-6-branch \
  && sed -i '1s/^/\/usr\/local\/lib64\n/' /etc/ld.so.conf \
  && ldconfig \
  && apt-get purge -y --auto-remove $buildDeps
