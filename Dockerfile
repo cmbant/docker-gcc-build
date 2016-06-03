@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
      libopenmpi-dev \
  && apt-get clean
 
-ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/master gcc_shortlog
+ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/gcc-6-branch gcc_shortlog
 
 RUN buildDeps='wget unzip bison flex libmpc-dev g++ ' \
  && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
