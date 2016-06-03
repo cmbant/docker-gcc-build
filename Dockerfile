@@ -1,4 +1,4 @@
-FROM ubuntu:15.04
+FROM ubuntu:latest
 
 MAINTAINER Antony Lewis
 
@@ -11,12 +11,14 @@ RUN apt-get update && apt-get install -y \
      libopenmpi-dev \
  && apt-get clean
 
-ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/vehre/head_cosmo gcc_shortlog
+ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/master gcc_shortlog
 
-RUN buildDeps='bison flex libmpc-dev g++ ' \
+RUN buildDeps='wget unzip bison flex libmpc-dev g++ ' \
  && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
- && git clone git://gcc.gnu.org/git/gcc.git --branch vehre/head_cosmo --single-branch --depth=1 \
- && cd gcc \
+ && wget https://codeload.github.com/gcc-mirror/gcc/zip/master \
+ && unzip master \
+ && rm -f master \
+ && cd gcc-master \
  && mkdir objdir \
  && cd objdir \
  && ../configure --enable-languages=c,c++,fortran --disable-multilib \
@@ -25,7 +27,7 @@ RUN buildDeps='bison flex libmpc-dev g++ ' \
  && make install \
  && make distclean \
  && cd ../.. \
- && rm -rf ./gcc \
+ && rm -rf ./gcc-master \
  && sed -i '1s/^/\/usr\/local\/lib64\n/' /etc/ld.so.conf \
  && ldconfig \
  && apt-get purge -y --auto-remove $buildDeps
