@@ -34,7 +34,7 @@ RUN buildDeps='bison flex libmpc-dev g++ libisl-dev libisl15 libcloog-isl-dev cl
  && make install \
  && make distclean \
  && cd ../.. \
- && rm -rf ./gcc-master \
+ && rm -rf ./gcc \
  && sed -i '1s/^/\/usr\/local\/lib64\n/' /etc/ld.so.conf \
  && ldconfig \
  && apt-get purge -y --auto-remove $buildDeps
