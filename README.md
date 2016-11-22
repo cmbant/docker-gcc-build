@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/zbeekman/docker-gcc-build.svg?branch=master)](https://travis-ci.org/zbeekman/docker-gcc-build)
+
+
 ### Overview
 
 This is an experimental fork of [cmbant/docker-gcc-build](https://github.com/cmbant/docker-gcc-build)
