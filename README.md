@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/zbeekman/docker-gcc-build.svg?branch=master)](https://travis-ci.org/zbeekman/docker-gcc-build)
-
+[![Layers](https://images.microbadger.com/badges/image/zbeekman/docker-gcc-build.svg)](https://microbadger.com/images/zbeekman/docker-gcc-build)
 
 ### Overview
 
