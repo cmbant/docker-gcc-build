@@ -1,14 +1,14 @@
 FROM ubuntu:latest
 
-MAINTAINER Antony Lewis
+MAINTAINER Izaak "Zaak" Beekman
 
 RUN apt-get update && apt-get install -y \
      build-essential \
      git \
-     liblapack-dev \
-     libopenblas-dev \
-     openmpi-bin \
-     libopenmpi-dev \
+     mpich \
+     libmpich-dev \
+     cmake \
+     cmake-curses-gui \
  && apt-get clean
 
 ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/master gcc_shortlog
