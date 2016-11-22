@@ -2,10 +2,6 @@ FROM ubuntu:latest
 
 MAINTAINER Izaak "Zaak" Beekman
 
-RUN service ntp stop \
-    && ntpdate -s time.nist.gov \
-    && ntp start
-
 RUN apt-get update && apt-get install -y \
      build-essential \
      git \
@@ -19,7 +15,7 @@ ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/master gcc_shortl
 
 RUN buildDeps='wget unzip bison flex libmpc-dev g++ texinfo libisl-dev libisl15' \
  && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
- && wget https://codeload.github.com/gcc-mirror/gcc/zip/master \
+ && wget https://codeload.github.com/gcc-mirror/gcc/zip/master -nv \
  && unzip -a -o -DD master \
  && rm -f master \
  && cd gcc-master \
