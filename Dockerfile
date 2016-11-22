@@ -22,10 +22,17 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
      libopenmpi-dev \     
  && apt-get clean
 
-ARG VCS_REF
-
-    LABEL org.label-schema.vcs-ref=$VCS_REF \
-          org.label-schema.vcs-url="e.g. https://github.com/zbeekman/docker-gcc-build"
+# Build-time metadata as defined at http://label-schema.org
+    ARG BUILD_DATE
+    ARG VCS_REF
+    LABEL org.label-schema.build-date=$BUILD_DATE \
+          org.label-schema.name="docker-gcc-build" \
+          org.label-schema.description="Nightly builds of GCC trunk using docker" \
+          org.label-schema.url="https://github.com/zbeekman/docker-gcc-build/" \
+          org.label-schema.vcs-ref=$VCS_REF \
+          org.label-schema.vcs-url="https://github.com/zbeekman/docker-gcc-build" \
+          org.label-schema.vendor="zbeekman" \
+          org.label-schema.schema-version="1.0"
 
 RUN buildDeps='bison flex libmpc-dev g++ ' \
  && apt-get update && apt-get install -y $buildDeps libisl15 --no-install-recommends \
