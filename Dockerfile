@@ -1,29 +1,35 @@
 FROM ubuntu:latest
 
-MAINTAINER Izaak "Zaak" Beekman
+MAINTAINER Izaak "Zaak" Beekman <contact@izaakbeekman.com>
 
-RUN apt-get update && apt-get install -y \
-     build-essential \
-     git \
-     mpich \
-     libmpich-dev \
-     cmake \
-     cmake-curses-gui \
+ENV REFRESHED_AT 2016-11-22
+
+RUN sed 's/main$/main universe/' -i /etc/apt/sources.list
+
+RUN apt-get update && apt-get install --no-install-recommends -y \
+     texinfo \
+     ca-certificates \
  && apt-get clean
 
-ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/master gcc_shortlog
+ENV APPS_REFRESHED_AT 2016-11-22
 
-RUN buildDeps='wget unzip bison flex libmpc-dev g++ texinfo libisl-dev libisl15' \
+RUN apt-get update && apt-get install --no-install-recommends -y \
+     build-essential \
+     cmake \
+     cmake-curses-gui \
+     git \
+     libmpich-dev \
+     mpich \
+ && apt-get clean
+
+RUN buildDeps='bison flex libmpc-dev g++ libisl-dev libisl15 libcloog-isl-dev cloog-isl' \
  && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
- && wget https://codeload.github.com/gcc-mirror/gcc/zip/master -nv \
- && unzip -a -o -DD master \
- && rm -f master \
- && cd gcc-master \
+ && git clone -q --single-branch --depth=1 https://github.com/gcc-mirror/gcc \
+ && cd gcc \
  && mkdir objdir \
  && cd objdir \
  && ../configure --enable-languages=c,c++,fortran --disable-multilib \
-    --build=x86_64-linux-gnu \
- && make -j"$(nproc)" bootstrap \
+    --disable-bootstrap --build=x86_64-linux-gnu \
  && make -j"$(nproc)" \
  && make install \
  && make distclean \
@@ -32,3 +38,7 @@ RUN buildDeps='wget unzip bison flex libmpc-dev g++ texinfo libisl-dev libisl15'
  && sed -i '1s/^/\/usr\/local\/lib64\n/' /etc/ld.so.conf \
  && ldconfig \
  && apt-get purge -y --auto-remove $buildDeps
+
+ENTRYPOINT ["/bin/bash"]
+
+CMD ["-l"]
