@@ -22,6 +22,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
      mpich \
  && apt-get clean
 
+ARG VCS_REF
+
+    LABEL org.label-schema.vcs-ref=$VCS_REF \
+          org.label-schema.vcs-url="e.g. https://github.com/zbeekman/docker-gcc-build"
+
 RUN buildDeps='bison flex libmpc-dev g++ ' \
  && apt-get update && apt-get install -y $buildDeps libisl15 --no-install-recommends \
  && git clone -q --single-branch --depth=1 https://github.com/gcc-mirror/gcc \
