@@ -18,8 +18,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
      cmake \
      cmake-curses-gui \
      git \
-     libmpich-dev \
-     mpich \
+     openmpi-bin \
+     libopenmpi-dev \     
  && apt-get clean
 
 ARG VCS_REF
