@@ -22,8 +22,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
      mpich \
  && apt-get clean
 
-RUN buildDeps='bison flex libmpc-dev g++ libisl-dev libisl15 libcloog-isl-dev cloog-isl' \
- && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
+RUN buildDeps='bison flex libmpc-dev g++ ' \
+ && apt-get update && apt-get install -y $buildDeps libisl15 --no-install-recommends \
  && git clone -q --single-branch --depth=1 https://github.com/gcc-mirror/gcc \
  && cd gcc \
  && mkdir objdir \
