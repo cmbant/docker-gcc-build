@@ -25,6 +25,7 @@ RUN  apt-get update && apt-get install --no-install-recommends -y \
           org.label-schema.vcs-ref=$VCS_REF \
           org.label-schema.vcs-url="https://github.com/zbeekman/docker-gcc-build" \
           org.label-schema.vendor="zbeekman" \
+          org.label-schema.license="GPL-2.0" \
           org.label-schema.schema-version="1.0"
 
 RUN buildDeps='bison flex libmpc-dev g++ ' \
