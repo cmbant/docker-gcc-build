@@ -1,11 +1,10 @@
-FROM ubuntu:latest
+FROM debian:testing-slim
 
 MAINTAINER Izaak "Zaak" Beekman <contact@izaakbeekman.com>
 
 ENV REFRESHED_AT 2016-11-22
 
-RUN sed -i 's/main$/main universe/' /etc/apt/sources.list \
- && apt-get update && apt-get install --no-install-recommends -y \
+RUN  apt-get update && apt-get install --no-install-recommends -y \
      texinfo \
      ca-certificates \
      build-essential \
@@ -29,7 +28,7 @@ RUN sed -i 's/main$/main universe/' /etc/apt/sources.list \
           org.label-schema.schema-version="1.0"
 
 RUN buildDeps='bison flex libmpc-dev g++ ' \
- && apt-get update && apt-get install -y $buildDeps libisl15 --no-install-recommends \
+ && apt-get update && apt-get install -y $buildDeps libisl-dev --no-install-recommends \
  && git clone -q --single-branch --depth=1 https://github.com/gcc-mirror/gcc \
  && cd gcc \
  && mkdir objdir \
