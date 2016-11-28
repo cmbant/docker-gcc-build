@@ -1,12 +1,16 @@
-[![Build Status](https://travis-ci.org/zbeekman/docker-gcc-build.svg?branch=master)](https://travis-ci.org/zbeekman/docker-gcc-build)
+[![Latest tag](https://images.microbadger.com/badges/version/zbeekman/docker-gcc-build.svg)](https://microbadger.com/images/zbeekman/docker-gcc-build) 
+[![Docker Automated build](https://img.shields.io/docker/automated/zbeekman/docker-gcc-build.svg)](https://hub.docker.com/r/zbeekman/docker-gcc-build/builds/) 
 [![Layers](https://images.microbadger.com/badges/image/zbeekman/docker-gcc-build.svg)](https://microbadger.com/images/zbeekman/docker-gcc-build)
 
 ### Overview
 
-This is an experimental fork of [cmbant/docker-gcc-build](https://github.com/cmbant/docker-gcc-build)
-This repository has the Dockerfile for source build of gcc 7 (experimental).
+This is a experimental fork of [cmbant/docker-gcc-build](https://github.com/cmbant/docker-gcc-build)
 
-Currently gcc 7 is required to run many Fortran 2003/2008 programs successfully due
+This docker image is rebuilt nightly, and GCC trunk is recompiled and included everytime the build
+is triggered. This should let you very quickly grab the latest GCC trunk without having to wait to
+rebuild it.
+
+Currently gcc >= 6.1 is required to run many Fortran 2003/2008 programs successfully due
 to bugs in earlier versions. Also includes standard mpich and basic build tools.
 
 Corresponding auto-build docker available at
