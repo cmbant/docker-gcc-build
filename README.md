@@ -4,7 +4,8 @@
 
 ### Overview
 
-This is a experimental fork of [cmbant/docker-gcc-build](https://github.com/cmbant/docker-gcc-build)
+This is a fork of [cmbant/docker-gcc-build](https://github.com/cmbant/docker-gcc-build) that
+updates the docker image with the latest GCC trunk automatically every night.
 
 This docker image is rebuilt nightly, and GCC trunk is recompiled and included everytime the build
 is triggered. This should let you very quickly grab the latest GCC trunk without having to wait to

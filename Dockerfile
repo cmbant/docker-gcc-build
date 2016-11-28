@@ -4,16 +4,10 @@ MAINTAINER Izaak "Zaak" Beekman <contact@izaakbeekman.com>
 
 ENV REFRESHED_AT 2016-11-22
 
-RUN sed 's/main$/main universe/' -i /etc/apt/sources.list
-
-RUN apt-get update && apt-get install --no-install-recommends -y \
+RUN sed -i 's/main$/main universe/' /etc/apt/sources.list \
+ && apt-get update && apt-get install --no-install-recommends -y \
      texinfo \
      ca-certificates \
- && apt-get clean
-
-ENV APPS_REFRESHED_AT 2016-11-22
-
-RUN apt-get update && apt-get install --no-install-recommends -y \
      build-essential \
      cmake \
      cmake-curses-gui \
