@@ -6,7 +6,7 @@
 ### Overview
 
 This is a fork of [cmbant/docker-gcc-build](https://github.com/cmbant/docker-gcc-build) that
-updates the docker image with the latest GCC trunk automatically every night.
+updates the docker image with the latest GCC trunk automatically every night, using [docker-nighlty-rebuild].
 
 This docker image is rebuilt nightly, and GCC trunk is recompiled and included everytime the build
 is triggered. This should let you very quickly grab the latest GCC trunk without having to wait to
@@ -27,3 +27,5 @@ do
 
 Navigating into /virtual/path in the bash shell, you can then run make etc as normal, acting
 on your local files.
+
+[docker-nightly-rebuild]: https://github.com/zbeekman/docker-nightly-rebuild
