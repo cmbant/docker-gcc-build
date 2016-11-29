@@ -4,7 +4,11 @@ MAINTAINER Izaak "Zaak" Beekman <contact@izaakbeekman.com>
 
 ENV REFRESHED_AT 2016-11-28
 
-RUN  apt-get update && apt-get install --no-install-recommends --no-install-suggests -y \
+COPY NOTICE /NOTICE
+
+RUN  cat /NOTICE \
+     && apt-get update \
+     && apt-get install --no-install-recommends --no-install-suggests -y \
      ca-certificates \
      build-essential \
      cmake \
@@ -15,7 +19,16 @@ RUN  apt-get update && apt-get install --no-install-recommends --no-install-sugg
      openssh-server \
  && apt-get autoremove \
  && apt-get clean \
- && useradd --system -s /sbin/nologin sourcerer
+ && useradd --system -s /sbin/nologin sourcerer \
+ && echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd && cat /NOTICE' >> /etc/bash.bashrc \
+ ; echo "\
+    docker-gcc-build  Copyright (C) 2016  Izaak B. Beekman\n\
+    This program comes with ABSOLUTELY NO WARRANTY.\n\
+    This is free software, and you are welcome to redistribute it\n\
+    under certain conditions.\n\
+    \n\
+    see https://github.com/zbeekman/docker-gcc-build/blob/master/LICENSE for the full GPL-v3 license\n" > /etc/motd
+
 
 # Build-time metadata as defined at http://label-schema.org
     ARG BUILD_DATE
