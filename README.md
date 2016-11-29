@@ -1,7 +1,8 @@
 [![Latest tag](https://images.microbadger.com/badges/version/zbeekman/docker-gcc-build.svg)](https://microbadger.com/images/zbeekman/docker-gcc-build) 
 [![Last build commit](https://images.microbadger.com/badges/commit/zbeekman/docker-gcc-build.svg)](https://microbadger.com/images/zbeekman/docker-gcc-build) 
 [![Docker Automated build](https://img.shields.io/docker/automated/zbeekman/docker-gcc-build.svg)](https://hub.docker.com/r/zbeekman/docker-gcc-build/builds/) 
-[![Layers](https://images.microbadger.com/badges/image/zbeekman/docker-gcc-build.svg)](https://microbadger.com/images/zbeekman/docker-gcc-build)
+[![Layers](https://images.microbadger.com/badges/image/zbeekman/docker-gcc-build.svg)](https://microbadger.com/images/zbeekman/docker-gcc-build) 
+[![License](https://images.microbadger.com/badges/license/zbeekman/docker-gcc-build.svg)](https://microbadger.com/images/zbeekman/docker-gcc-build)
 
 ### Overview
 

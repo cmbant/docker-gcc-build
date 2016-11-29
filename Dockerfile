@@ -41,6 +41,7 @@ RUN  cat /NOTICE \
           org.label-schema.vcs-url="https://github.com/zbeekman/docker-gcc-build" \
           org.label-schema.vendor="zbeekman" \
           org.label-schema.license="GPL-3.0" \
+          org.label-schema.docker.cmd="docker run -v /local/code/source:/virtual/path -i -t zbeekman/docker-gcc-build" \
           org.label-schema.schema-version="1.0"
 
 ENV transientBuildDeps subversion git-svn bison flex libmpc-dev g++
