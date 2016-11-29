@@ -30,10 +30,10 @@ RUN  apt-get update && apt-get install --no-install-recommends --no-install-sugg
           org.label-schema.license="GPL-3.0" \
           org.label-schema.schema-version="1.0"
 
-ENV transientBuildDeps bison flex libmpc-dev g++
+ENV transientBuildDeps git-svn bison flex libmpc-dev g++
 
 RUN apt-get update && apt-get install -y $transientBuildDeps libisl-dev --no-install-recommends --no-install-suggests \
- && git clone -q --single-branch --depth=1 https://github.com/gcc-mirror/gcc \
+ && git svn clone -s -rHEAD svn://gcc.gnu.org/svn/gcc/
  && cd gcc \
  && mkdir objdir \
  && cd objdir \
