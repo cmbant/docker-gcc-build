@@ -30,10 +30,10 @@ RUN  apt-get update && apt-get install --no-install-recommends --no-install-sugg
           org.label-schema.license="GPL-3.0" \
           org.label-schema.schema-version="1.0"
 
-ENV transientBuildDeps git-svn bison flex libmpc-dev g++
+ENV transientBuildDeps subversion git-svn bison flex libmpc-dev g++
 
 RUN apt-get update && apt-get install -y $transientBuildDeps libisl-dev --no-install-recommends --no-install-suggests \
- && git svn clone -s -rHEAD svn://gcc.gnu.org/svn/gcc/
+ && git svn clone --no-minimize-url --ignore-paths="^[^/]+/(?:branches|tags)" --preserve-empty-dirs --localtime -s -rHEAD svn://gcc.gnu.org/svn/gcc/ \
  && cd gcc \
  && mkdir objdir \
  && cd objdir \
