@@ -47,7 +47,7 @@ RUN  cat /NOTICE \
 ENV transientBuildDeps bison flex libmpc-dev g++
 
 RUN apt-get update && apt-get install -y $transientBuildDeps libisl-dev --no-install-recommends --no-install-suggests \
- && git clone --depth=1 --single-branch --branch=master https://gcc.gnu.org/git/gcc.git gcc \
+ && git clone --depth=1 --single-branch --branch master git://gcc.gnu.org/git/gcc.git gcc \
  && cd gcc \
  && mkdir objdir \
  && cd objdir \
