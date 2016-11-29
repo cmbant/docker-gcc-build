@@ -63,7 +63,7 @@ contain are all licensed under their own licensing agreements.
 
 ```
 
-### Chages
+### Changes
 
 This software has been extensively modified from @cmbant's original
 software, which may be obtained at [cmbant/docker-gcc-build], starting
