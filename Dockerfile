@@ -9,9 +9,6 @@ RUN  apt-get update && apt-get install --no-install-recommends --no-install-sugg
      build-essential \
      cmake \
      git \
-     hwloc-nox \
-     mpich \
-     libmpich-dev \
      openssh-client \
      openssh-server \
  && apt-get autoremove \
