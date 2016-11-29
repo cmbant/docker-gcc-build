@@ -21,7 +21,7 @@ RUN  cat /NOTICE \
  && apt-get clean \
  && useradd --system -s /sbin/nologin sourcerer \
  && echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd && cat /NOTICE' >> /etc/bash.bashrc \
- ; echo "\
+ && echo "\
     docker-gcc-build  Copyright (C) 2016  Izaak B. Beekman\n\
     This program comes with ABSOLUTELY NO WARRANTY.\n\
     This is free software, and you are welcome to redistribute it\n\
@@ -44,10 +44,10 @@ RUN  cat /NOTICE \
           org.label-schema.docker.cmd="docker run -v /local/code/source:/virtual/path -i -t zbeekman/docker-gcc-build" \
           org.label-schema.schema-version="1.0"
 
-ENV transientBuildDeps subversion git-svn bison flex libmpc-dev g++
+ENV transientBuildDeps bison flex libmpc-dev g++
 
 RUN apt-get update && apt-get install -y $transientBuildDeps libisl-dev --no-install-recommends --no-install-suggests \
- && git svn clone --no-minimize-url --ignore-paths="^[^/]+/(?:branches|tags)" --preserve-empty-dirs --localtime -s -rHEAD svn://gcc.gnu.org/svn/gcc/ \
+ && git clone --depth=1 --single-branch --branch=master https://gcc.gnu.org/git/gcc.git gcc \
  && cd gcc \
  && mkdir objdir \
  && cd objdir \
