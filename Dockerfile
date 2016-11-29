@@ -9,8 +9,6 @@ RUN  apt-get update && apt-get install --no-install-recommends --no-install-sugg
      build-essential \
      cmake \
      git \
-     openmpi-bin \
-     libopenmpi-dev \
      openssh-client \
      openssh-server \
  && apt-get autoremove \
