@@ -12,5 +12,7 @@ push:
 
 run:
 	docker run -v $(WORKDIR):/virtual/path -i -t $(NAME)
+runclean:
+	docker run --rm -v $(WORKDIR):/virtual/path -i -t $(NAME)
 
 release: build push
