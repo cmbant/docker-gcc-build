@@ -4,11 +4,13 @@ WORKDIR = ${HOME}/Sandbox
 default: build
 
 build:
-	@docker build --build-arg VCS_REF=`git rev-parse --short HEAD` \
-	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` -t $(NAME) .
+	@docker build --build-arg VCS_REF=$(shell git rev-parse --short HEAD) \
+	--build-arg BUILD_DATE=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ") -t $(NAME) . \
+	| tee $(NAME)-build.log
 
 push:
 	docker push $(NAME)
+	curl -X POST ${UBADGER_ENDPOINT}
 
 run:
 	docker run -v $(WORKDIR):/virtual/path -i -t $(NAME)

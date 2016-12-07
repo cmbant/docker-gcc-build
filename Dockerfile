@@ -3,31 +3,45 @@ FROM debian:testing-slim
 MAINTAINER Izaak "Zaak" Beekman <contact@izaakbeekman.com>
 
 ENV REFRESHED_AT 2016-11-28
-
 COPY NOTICE /NOTICE
 
-RUN  cat /NOTICE \
+RUN  DEBIAN_FRONTEND=noninteractive \
+     && set -v \
+     && echo "$DEBIAN_FRONTEND" \
+     && cat /NOTICE \
      && apt-get update \
      && apt-get install --no-install-recommends --no-install-suggests -y \
-     ca-certificates \
-     build-essential \
-     cmake \
-     git \
-     openmpi-bin \
-     libopenmpi-dev \
-     openssh-client \
-     openssh-server \
- && apt-get autoremove \
- && apt-get clean \
- && useradd --system -s /sbin/nologin sourcerer \
- && echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd && cat /NOTICE' >> /etc/bash.bashrc \
- && echo "\
-    docker-gcc-build  Copyright (C) 2016  Izaak B. Beekman\n\
-    This program comes with ABSOLUTELY NO WARRANTY.\n\
-    This is free software, and you are welcome to redistribute it\n\
-    under certain conditions.\n\
-    \n\
-    see https://github.com/zbeekman/docker-gcc-build/blob/master/LICENSE for the full GPL-v3 license\n" > /etc/motd
+	  autoconf \
+	  automake \
+	  ca-certificates \
+	  cmake \
+	  curl \
+	  file \
+	  g++ \
+	  gcc \
+	  gfortran \
+	  git \
+	  libopenmpi-dev \
+	  libtool \
+	  make \
+	  openmpi-bin \
+	  openssh-client \
+	  openssh-server \
+	  patch \
+	  procps \
+	  wget \
+     && apt-get autoremove \
+     && apt-get clean \
+     && rm -rf /var/lib/apt/lists/* /var/log/* /tmp/* \
+     && useradd -m --system -s /sbin/nologin sourcerer \
+     && echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd && cat /NOTICE' >> /etc/bash.bashrc \
+     && echo "\
+         docker-gcc-build  Copyright (C) 2016  Izaak B. Beekman\n\
+	 This program comes with ABSOLUTELY NO WARRANTY.\n\
+	 This is free software, and you are welcome to redistribute it\n\
+	 under certain conditions.\n\
+	 \n\
+	 see https://github.com/zbeekman/docker-gcc-build/blob/master/LICENSE for the full GPL-v3 license\n" > /etc/motd
 
 
 # Build-time metadata as defined at http://label-schema.org
@@ -44,23 +58,32 @@ RUN  cat /NOTICE \
           org.label-schema.docker.cmd="docker run -v /local/code/source:/virtual/path -i -t zbeekman/docker-gcc-build" \
           org.label-schema.schema-version="1.0"
 
-ENV transientBuildDeps bison flex libmpc-dev g++
 
-RUN apt-get update && apt-get install -y $transientBuildDeps libisl-dev --no-install-recommends --no-install-suggests \
- && git clone --depth=1 --single-branch --branch master git://gcc.gnu.org/git/gcc.git gcc \
- && cd gcc \
- && mkdir objdir \
- && cd objdir \
- && ../configure --enable-languages=c,c++,fortran --disable-multilib \
-    --disable-bootstrap --build=x86_64-linux-gnu \
- && make -j"$(nproc)" \
- && make install \
- && make distclean \
- && cd ../.. \
- && rm -rf ./gcc \
- && sed -i '1s/^/\/usr\/local\/lib64\n/' /etc/ld.so.conf \
- && ldconfig \
- && apt-get purge -y --auto-remove $transientBuildDeps
+
+RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="bison flex libmpc-dev g++" \
+    && set -x \
+    && echo "$DEBIAN_FRONTEND" "$transientBuildDeps" \
+    && apt-get update \
+    && apt-get install -y $transientBuildDeps libisl-dev --no-install-recommends --no-install-suggests \
+    && git clone --depth=1 --single-branch --branch master git://gcc.gnu.org/git/gcc.git gcc \
+    && cd gcc \
+    && mkdir objdir \
+    && cd objdir \
+    && ../configure --enable-languages=c,c++,fortran --disable-multilib \
+       --disable-bootstrap --build=x86_64-linux-gnu \
+    && make -j"$(nproc)" \
+    && make install-strip \
+    && make distclean \
+    && cd ../.. \
+    && rm -rf ./gcc \
+    && echo '/usr/local/lib64' > /etc/ld.so.conf.d/local-lib64.conf \
+    && ldconfig -v\
+    && apt-get purge -y --auto-remove $transientBuildDeps \
+    && dpkg-divert --divert /usr/bin/gcc.orig --rename /usr/bin/gcc \
+    && dpkg-divert --divert /usr/bin/g++.orig --rename /usr/bin/g++ \
+    && dpkg-divert --divert /usr/bin/gfortran.orig --rename /usr/bin/gfortran \
+    && update-alternatives --install /usr/bin/cc cc /usr/local/bin/gcc 999 \
+    && rm -rf /var/lib/apt/lists/* /var/log/* /tmp/*
 
 USER sourcerer
 
