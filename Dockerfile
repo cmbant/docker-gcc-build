@@ -36,12 +36,12 @@ RUN  DEBIAN_FRONTEND=noninteractive \
      && useradd -m --system -s /sbin/nologin sourcerer \
      && echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd && cat /NOTICE' >> /etc/bash.bashrc \
      && echo "\
-         docker-gcc-build  Copyright (C) 2016  Izaak B. Beekman\n\
+         nightly-gcc-trunk-docker-image  Copyright (C) 2016  Izaak B. Beekman\n\
 	 This program comes with ABSOLUTELY NO WARRANTY.\n\
 	 This is free software, and you are welcome to redistribute it\n\
 	 under certain conditions.\n\
 	 \n\
-	 see https://github.com/zbeekman/docker-gcc-build/blob/master/LICENSE for the full GPL-v3 license\n" > /etc/motd
+	 see https://github.com/zbeekman/nightly-gcc-trunk-docker-image/blob/master/LICENSE for the full GPL-v3 license\n" > /etc/motd
 
 
 # Build-time metadata as defined at http://label-schema.org
@@ -49,14 +49,14 @@ RUN  DEBIAN_FRONTEND=noninteractive \
     ARG VCS_REF
     ARG VCS_URL
     LABEL org.label-schema.build-date=$BUILD_DATE \
-          org.label-schema.name="docker-gcc-build" \
+          org.label-schema.name="nightly-gcc-trunk-docker-image" \
           org.label-schema.description="Nightly builds of GCC trunk using docker" \
-          org.label-schema.url="https://github.com/zbeekman/docker-gcc-build/" \
+          org.label-schema.url="https://github.com/zbeekman/nightly-gcc-trunk-docker-image/" \
           org.label-schema.vcs-ref=$VCS_REF \
           org.label-schema.vcs-url=$VCS_URL \
           org.label-schema.vendor="zbeekman" \
           org.label-schema.license="GPL-3.0" \
-          org.label-schema.docker.cmd="docker run -v $(pwd):/virtual/path -i -t zbeekman/docker-gcc-build" \
+          org.label-schema.docker.cmd="docker run -v $(pwd):/virtual/path -i -t zbeekman/nightly-gcc-trunk-docker-image" \
           org.label-schema.schema-version="1.0"
 
 

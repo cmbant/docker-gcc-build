@@ -1,4 +1,4 @@
-NAME = zbeekman/docker-gcc-build
+NAME = zbeekman/nightly-gcc-trunk-docker-image
 WORKDIR = ${HOME}/Sandbox
 
 default: build

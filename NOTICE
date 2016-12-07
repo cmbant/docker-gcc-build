@@ -1,4 +1,4 @@
-    docker-gcc-build: Build GCC trunk from source in a Docker container
+    nightly-gcc-trunk-docker-image: Build GCC trunk from source in a Docker container
     Copyright (C) 2016  Izaak B. Beekman
 
     This program is free software: you can redistribute it and/or modify

@@ -1,12 +1,12 @@
-[![Latest tag](https://images.microbadger.com/badges/version/zbeekman/docker-gcc-build.svg)](https://microbadger.com/images/zbeekman/docker-gcc-build) 
-[![Last build commit](https://images.microbadger.com/badges/commit/zbeekman/docker-gcc-build.svg)](https://microbadger.com/images/zbeekman/docker-gcc-build) 
-[![Docker Automated build](https://img.shields.io/docker/automated/zbeekman/docker-gcc-build.svg)](https://hub.docker.com/r/zbeekman/docker-gcc-build/builds/) 
-[![Layers](https://images.microbadger.com/badges/image/zbeekman/docker-gcc-build.svg)](https://microbadger.com/images/zbeekman/docker-gcc-build) 
-[![License](https://images.microbadger.com/badges/license/zbeekman/docker-gcc-build.svg)](https://microbadger.com/images/zbeekman/docker-gcc-build)
+[![Latest tag](https://images.microbadger.com/badges/version/zbeekman/nightly-gcc-trunk-docker-image.svg)](https://microbadger.com/images/zbeekman/nightly-gcc-trunk-docker-image) 
+[![Last build commit](https://images.microbadger.com/badges/commit/zbeekman/nightly-gcc-trunk-docker-image.svg)](https://microbadger.com/images/zbeekman/nightly-gcc-trunk-docker-image) 
+[![Docker Automated build](https://img.shields.io/docker/automated/zbeekman/nightly-gcc-trunk-docker-image.svg)](https://hub.docker.com/r/zbeekman/nightly-gcc-trunk-docker-image/builds/) 
+[![Layers](https://images.microbadger.com/badges/image/zbeekman/nightly-gcc-trunk-docker-image.svg)](https://microbadger.com/images/zbeekman/nightly-gcc-trunk-docker-image) 
+[![License](https://images.microbadger.com/badges/license/zbeekman/nightly-gcc-trunk-docker-image.svg)](https://microbadger.com/images/zbeekman/nightly-gcc-trunk-docker-image)
 
 ### Overview
 
-This is a fork of [cmbant/docker-gcc-build] that updates the docker
+This is a fork of [cmbant/nightly-gcc-trunk-docker-image] that updates the docker
 image with the latest GCC trunk automatically every night, using
 [nightly-docker-rebuild].
 
@@ -20,7 +20,7 @@ programs successfully due to bugs in earlier versions. Also includes
 standard OpenMPI and basic build tools.
 
 Corresponding auto-built docker available at
-https://registry.hub.docker.com/u/zbeekman/docker-gcc-build/
+https://registry.hub.docker.com/u/zbeekman/nightly-gcc-trunk-docker-image/
 
 ### Usage
 
@@ -28,7 +28,7 @@ To make an interactive shell ready for compiling you local code at
 `/local/code/source` do
 
 ```
-docker run -v /local/code/source:/virtual/path -i -t zbeekman/docker-gcc-build
+docker run -v /local/code/source:/virtual/path -i -t zbeekman/nightly-gcc-trunk-docker-image
 ```
 
 Navigating into `/virtual/path` in the bash shell, you can then run `make`
@@ -36,7 +36,7 @@ etc as normal, acting on your local files.
 
 ### A note on licensing (GPL-v3)
 
-This repository was original forked from [cmbant/docker-gcc-build]
+This repository was original forked from [cmbant/nightly-gcc-trunk-docker-image]
 which was licensed under GPL v2. Since there was no explicit
 notification that it could only be licensed under version 2, this
 repository is licensed under GPL-v3, which is consistent with the
@@ -45,7 +45,7 @@ repository: Docker, and the resulting Docker images and software they
 contain are all licensed under their own licensing agreements.
 
 ```
-    docker-gcc-build: Build GCC trunk from source in a Docker container
+    nightly-gcc-trunk-docker-image: Build GCC trunk from source in a Docker container
     Copyright (C) 2016  Izaak B. Beekman
 
     This program is free software: you can redistribute it and/or modify
@@ -66,7 +66,7 @@ contain are all licensed under their own licensing agreements.
 ### Changes
 
 This software has been extensively modified from @cmbant's original
-software, which may be obtained at [cmbant/docker-gcc-build], starting
+software, which may be obtained at [cmbant/nightly-gcc-trunk-docker-image], starting
 November 2016. Some changes include, but are not limited to:
 
  - switch to debian:testing-slim base image login as non-root user by
@@ -77,5 +77,5 @@ November 2016. Some changes include, but are not limited to:
  - nightly automated builds on docker hub
  - image meta data on build date and commit
 
-[cmbant/docker-gcc-build]: https://github.com/cmbant/docker-gcc-build
+[cmbant/nightly-gcc-trunk-docker-image]: https://github.com/cmbant/nightly-gcc-trunk-docker-image
 [nightly-docker-rebuild]: https://github.com/zbeekman/nightly-docker-rebuild

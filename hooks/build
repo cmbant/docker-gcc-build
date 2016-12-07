@@ -13,4 +13,4 @@ echo "Build hook running"
 docker build --build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
              --build-arg VCS_REF=$(git rev-parse --short HEAD) \
              --build-arg VCS_URL=$(git remote get-url origin) \
-             -t ${IMAGE_NAME:-zbeekman/docker-gcc-build} .
+             -t ${IMAGE_NAME:-zbeekman/nightly-gcc-trunk-docker-image} .
