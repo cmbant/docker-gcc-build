@@ -2,7 +2,7 @@ FROM debian:testing-slim
 
 MAINTAINER Izaak "Zaak" Beekman <contact@izaakbeekman.com>
 
-ENV REFRESHED_AT 2016-11-28
+ENV REFRESHED_AT 2016-12-07
 COPY NOTICE /NOTICE
 
 RUN  DEBIAN_FRONTEND=noninteractive \
@@ -47,15 +47,16 @@ RUN  DEBIAN_FRONTEND=noninteractive \
 # Build-time metadata as defined at http://label-schema.org
     ARG BUILD_DATE
     ARG VCS_REF
+    ARG VCS_URL
     LABEL org.label-schema.build-date=$BUILD_DATE \
           org.label-schema.name="docker-gcc-build" \
           org.label-schema.description="Nightly builds of GCC trunk using docker" \
           org.label-schema.url="https://github.com/zbeekman/docker-gcc-build/" \
           org.label-schema.vcs-ref=$VCS_REF \
-          org.label-schema.vcs-url="https://github.com/zbeekman/docker-gcc-build" \
+          org.label-schema.vcs-url=$VCS_URL \
           org.label-schema.vendor="zbeekman" \
           org.label-schema.license="GPL-3.0" \
-          org.label-schema.docker.cmd="docker run -v /local/code/source:/virtual/path -i -t zbeekman/docker-gcc-build" \
+          org.label-schema.docker.cmd="docker run -v $(pwd):/virtual/path -i -t zbeekman/docker-gcc-build" \
           org.label-schema.schema-version="1.0"
 
 
