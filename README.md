@@ -6,7 +6,7 @@
 
 ### Overview
 
-This is a fork of [cmbant/nightly-gcc-trunk-docker-image] that updates the docker
+This is a fork of [cmbant/docker-gcc-build] that updates the docker
 image with the latest GCC trunk automatically every night, using
 [nightly-docker-rebuild].
 
@@ -36,7 +36,7 @@ etc as normal, acting on your local files.
 
 ### A note on licensing (GPL-v3)
 
-This repository was original forked from [cmbant/nightly-gcc-trunk-docker-image]
+This repository was original forked from [cmbant/docker-gcc-build]
 which was licensed under GPL v2. Since there was no explicit
 notification that it could only be licensed under version 2, this
 repository is licensed under GPL-v3, which is consistent with the
@@ -66,7 +66,7 @@ contain are all licensed under their own licensing agreements.
 ### Changes
 
 This software has been extensively modified from @cmbant's original
-software, which may be obtained at [cmbant/nightly-gcc-trunk-docker-image], starting
+software, which may be obtained at [cmbant/docker-gcc-build], starting
 November 2016. Some changes include, but are not limited to:
 
  - switch to debian:testing-slim base image login as non-root user by
@@ -77,5 +77,5 @@ November 2016. Some changes include, but are not limited to:
  - nightly automated builds on docker hub
  - image meta data on build date and commit
 
-[cmbant/nightly-gcc-trunk-docker-image]: https://github.com/cmbant/nightly-gcc-trunk-docker-image
+[cmbant/docker-gcc-build]: https://github.com/cmbant/docker-gcc-build
 [nightly-docker-rebuild]: https://github.com/zbeekman/nightly-docker-rebuild
