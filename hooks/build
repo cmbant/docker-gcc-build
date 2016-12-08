@@ -9,8 +9,10 @@ set -o verbose
 set -o pipefail
 set -o errexit
 
+d_repo='zbeekman/nightly-gcc-trunk-docker-image'
+
 echo "Build hook running"
-docker build --build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
-             --build-arg VCS_REF=$(git rev-parse --short HEAD) \
-             --build-arg VCS_URL=$(git remote get-url origin) \
-             -t ${IMAGE_NAME:-zbeekman/nightly-gcc-trunk-docker-image} .
+docker build --build-arg BUILD_DATE="$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
+             --build-arg VCS_REF="${SOURCE_COMMIT:-$(git rev-parse --short HEAD)}" \
+             --build-arg VCS_URL="$(git remote get-url --all origin || echo "https://github.com/${DOCKER_REPO:-${d_repo}}")" \
+             -t "${IMAGE_NAME:-${d_repo}:latest}" .
