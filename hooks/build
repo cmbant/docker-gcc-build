@@ -8,6 +8,7 @@
 set -o verbose
 set -o pipefail
 set -o errexit
+set -x
 
 d_repo='zbeekman/nightly-gcc-trunk-docker-image'
 d_git_remotes=($(git remote show))
@@ -15,7 +16,7 @@ echo "${#d_git_remotes[@]} git remotes found."
 n_remotes=${#d_git_remotes[@]}
 if (( n_remotes > 0 )) ; then
     echo "Using remote: ${d_git_remotes[0]}"
-    d_vcs_url="$(git remote get-url --all "${d_git_remotes[0]}")"
+    d_vcs_url="$(git remote -v | awk 'FNR == 1 {print $2}')"
 fi
 
 if [[ -z "${d_vcs_url:-}" ]]; then
