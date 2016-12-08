@@ -11,24 +11,15 @@ RUN  DEBIAN_FRONTEND=noninteractive \
      && cat /NOTICE \
      && apt-get update \
      && apt-get install --no-install-recommends --no-install-suggests -y \
-	  autoconf \
-	  automake \
 	  ca-certificates \
-	  cmake \
 	  curl \
-	  file \
 	  g++ \
 	  gcc \
 	  gfortran \
 	  git \
-	  libopenmpi-dev \
 	  libtool \
 	  make \
-	  openmpi-bin \
 	  openssh-client \
-	  openssh-server \
-	  patch \
-	  procps \
 	  wget \
      && apt-get autoremove \
      && apt-get clean \

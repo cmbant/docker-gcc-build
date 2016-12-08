@@ -4,10 +4,7 @@ WORKDIR = ${HOME}/Sandbox
 default: build
 
 build:
-	@docker build --build-arg VCS_REF=$(shell git rev-parse --short HEAD) \
-	--build-arg BUILD_DATE=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ") \
-	--build-arg VCS_URL=$(shell git remote get-url --push origin) -t $(NAME) . \
-	2>&1 | tee $(subst /,_,$(NAME))-build.log
+	@hooks/build 2>&1 | tee $(subst /,_,$(NAME))-build.log
 
 push:
 	docker push $(NAME)
