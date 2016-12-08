@@ -62,7 +62,7 @@ RUN  DEBIAN_FRONTEND=noninteractive \
 
 
 RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="bison flex libmpc-dev g++" \
-    && set -x \
+    && set -v \
     && echo "$DEBIAN_FRONTEND" "$transientBuildDeps" \
     && apt-get update \
     && apt-get install -y $transientBuildDeps libisl-dev --no-install-recommends --no-install-suggests \
