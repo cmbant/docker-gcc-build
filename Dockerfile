@@ -52,7 +52,7 @@ RUN  DEBIAN_FRONTEND=noninteractive \
 
 
 
-RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="bison flex libmpc-dev g++" \
+RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="bison flex libmpc-dev" \
     && set -v \
     && echo "$DEBIAN_FRONTEND" "$transientBuildDeps" \
     && apt-get update \
