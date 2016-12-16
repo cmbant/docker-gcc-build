@@ -4,5 +4,7 @@ Makefile
 log.*
 *.log
 .gitignore
-\#*\#
+*\#*\#
+*#*#
 .gitattributes
+*.DS_store

@@ -24,7 +24,6 @@ RUN  DEBIAN_FRONTEND=noninteractive \
      && apt-get autoremove \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/* /var/log/* /tmp/* \
-     && useradd -m --system -s /sbin/nologin sourcerer \
      && echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd && cat /NOTICE' >> /etc/bash.bashrc \
      && printf "\
          nightly-gcc-trunk-docker-image  Copyright (C) 2016  Izaak B. Beekman\n\
@@ -76,8 +75,6 @@ RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="bison flex libmpc-dev" \
     && dpkg-divert --divert /usr/bin/gfortran.orig --rename /usr/bin/gfortran \
     && update-alternatives --install /usr/bin/cc cc /usr/local/bin/gcc 999 \
     && rm -rf /var/lib/apt/lists/* /var/log/* /tmp/*
-
-USER sourcerer
 
 ENTRYPOINT ["/bin/bash"]
 
