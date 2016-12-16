@@ -11,16 +11,17 @@ RUN  DEBIAN_FRONTEND=noninteractive \
      && cat /NOTICE \
      && apt-get update \
      && apt-get install --no-install-recommends --no-install-suggests -y \
-	  ca-certificates \
-	  curl \
-	  g++ \
-	  gcc \
-	  gfortran \
-	  git \
-	  libtool \
-	  make \
-	  openssh-client \
-	  wget \
+        apt-utils \
+        ca-certificates \
+        curl \
+        g++ \
+        gcc \
+        gfortran \
+        git \
+        libtool \
+        make \
+        openssh-client \
+        wget \
      && apt-get autoremove \
      && apt-get clean \
      && rm -rf /var/lib/apt/lists/* /var/log/* /tmp/* \
