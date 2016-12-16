@@ -11,7 +11,6 @@ RUN  DEBIAN_FRONTEND=noninteractive \
      && cat /NOTICE \
      && apt-get update \
      && apt-get install --no-install-recommends --no-install-suggests -y \
-        apt-utils \
         ca-certificates \
         curl \
         g++ \
@@ -32,7 +31,7 @@ RUN  DEBIAN_FRONTEND=noninteractive \
 	 This is free software, and you are welcome to redistribute it\n\
 	 under certain conditions.\n\
 	 \n\
-	 see https://github.com/zbeekman/nightly-gcc-trunk-docker-image/blob/master/LICENSE for the full GPL-v3 license\n" > /etc/motd
+	 see https://github.com/zbeekman/nightly-gcc-trunk-docker-image/blob/master/LICENSE for the full GPL-v3 license\n\n\n" > /etc/motd
 
 
 # Build-time metadata as defined at http://label-schema.org
@@ -52,7 +51,7 @@ RUN  DEBIAN_FRONTEND=noninteractive \
 
 
 
-RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="bison flex libmpc-dev" \
+RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison flex libmpc-dev" \
     && set -v \
     && echo "$DEBIAN_FRONTEND" "$transientBuildDeps" \
     && apt-get update \
@@ -70,11 +69,11 @@ RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="bison flex libmpc-dev" \
     && rm -rf ./gcc \
     && echo '/usr/local/lib64' > /etc/ld.so.conf.d/local-lib64.conf \
     && ldconfig -v\
-    && apt-get purge -y --auto-remove $transientBuildDeps \
     && dpkg-divert --divert /usr/bin/gcc.orig --rename /usr/bin/gcc \
     && dpkg-divert --divert /usr/bin/g++.orig --rename /usr/bin/g++ \
     && dpkg-divert --divert /usr/bin/gfortran.orig --rename /usr/bin/gfortran \
     && update-alternatives --install /usr/bin/cc cc /usr/local/bin/gcc 999 \
+    && apt-get purge -y --auto-remove $transientBuildDeps \
     && rm -rf /var/lib/apt/lists/* /var/log/* /tmp/*
 
 ENTRYPOINT ["/bin/bash"]
