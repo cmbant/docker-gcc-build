@@ -15,7 +15,7 @@ included everytime the build is triggered. This should let you very
 quickly grab the latest GCC trunk without having to wait to rebuild
 it.
 
-Currently gcc >= 6.1 is required to run many Fortran 2003/2008
+Currently gcc >= 6.2 is required to run many Fortran 2003/2008
 programs successfully due to bugs in earlier versions. Also includes
 standard OpenMPI and basic build tools.
 
@@ -69,8 +69,8 @@ This software has been extensively modified from @cmbant's original
 software, which may be obtained at [cmbant/docker-gcc-build], starting
 November 2016. Some changes include, but are not limited to:
 
- - switch to debian:testing-slim base image login as non-root user by
-   default
+ - switch to sourceryinstitute/docker-base:latest base image login as non-
+   root user by default
  - other changes made in attempt to improve utility of resultant docker
    image
  - other changes in attempt to shrink size of docker image
