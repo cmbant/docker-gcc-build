@@ -1,43 +1,15 @@
-FROM debian:testing-slim
+FROM sourceryinstitute/docker-base:latest
 
 MAINTAINER Izaak "Zaak" Beekman <contact@izaakbeekman.com>
 
 ENV REFRESHED_AT 2016-12-07
 COPY NOTICE /NOTICE
 
-RUN  DEBIAN_FRONTEND=noninteractive \
-     && set -v \
-     && echo "$DEBIAN_FRONTEND" \
-     && cat /NOTICE \
-     && apt-get update \
-     && apt-get install --no-install-recommends --no-install-suggests -y \
-        ca-certificates \
-        curl \
-        g++ \
-        gcc \
-        gfortran \
-        git \
-        libtool \
-        make \
-        openssh-client \
-        wget \
-     && apt-get autoremove \
-     && apt-get clean \
-     && rm -rf /var/lib/apt/lists/* /var/log/* /tmp/* \
-     && echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/issue && cat /etc/motd && cat /NOTICE' >> /etc/bash.bashrc \
-     && printf "\
-         nightly-gcc-trunk-docker-image  Copyright (C) 2016  Izaak B. Beekman\n\
-	 This program comes with ABSOLUTELY NO WARRANTY.\n\
-	 This is free software, and you are welcome to redistribute it\n\
-	 under certain conditions.\n\
-	 \n\
-	 see https://github.com/zbeekman/nightly-gcc-trunk-docker-image/blob/master/LICENSE for the full GPL-v3 license\n\n\n" > /etc/motd
-
-
 # Build-time metadata as defined at http://label-schema.org
     ARG BUILD_DATE
     ARG VCS_REF
     ARG VCS_URL
+    ARG VCS_VERSION=latest
     LABEL org.label-schema.schema-version="1.0" \
     	  org.label-schema.build-date="$BUILD_DATE" \
           org.label-schema.name="nightly-gcc-trunk-docker-image" \
@@ -45,6 +17,7 @@ RUN  DEBIAN_FRONTEND=noninteractive \
           org.label-schema.url="https://github.com/zbeekman/nightly-gcc-trunk-docker-image/" \
           org.label-schema.vcs-ref="$VCS_REF" \
           org.label-schema.vcs-url="$VCS_URL" \
+	  org.label-schema.version="$VCS_VERSION" \
           org.label-schema.vendor="zbeekman" \
           org.label-schema.license="GPL-3.0" \
           org.label-schema.docker.cmd="docker run -v $(pwd):/virtual/path -i -t zbeekman/nightly-gcc-trunk-docker-image"
@@ -53,6 +26,13 @@ RUN  DEBIAN_FRONTEND=noninteractive \
 
 RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison flex libmpc-dev" \
     && set -v \
+    && printf "\
+        nightly-gcc-trunk-docker-image  Copyright (C) 2016  Izaak B. Beekman\n\
+        This program comes with ABSOLUTELY NO WARRANTY.\n\
+        This is free software, and you are welcome to redistribute it\n\
+        under certain conditions.\n\
+        \n\
+        see https://github.com/zbeekman/nightly-gcc-trunk-docker-image/blob/master/LICENSE for the full GPL-v3 license\n\n\n" > /etc/motd \
     && echo "$DEBIAN_FRONTEND" "$transientBuildDeps" \
     && apt-get update \
     && apt-get install -y $transientBuildDeps libisl-dev --no-install-recommends --no-install-suggests \
