@@ -9,6 +9,7 @@ plus basic build tools.
 GitHub: http://registry.hub.docker.com/u/cmbant/docker-gcc-build/
 DockerHub: http://registry.hub.docker.com/u/cmbant/docker-gcc-build/
 
+Use master branch if you need very latest gcc source version.
 
 ### Usage
 
