@@ -30,4 +30,5 @@ RUN buildDeps='wget unzip bison flex libmpc-dev g++ ' \
  && rm -rf ./gcc-gcc-6-branch \
  && sed -i '1s/^/\/usr\/local\/lib64\n/' /etc/ld.so.conf \
  && ldconfig \
- && apt-get purge -y --auto-remove $buildDeps
+ && apt-get purge -y --auto-remove $buildDeps \
+ && apt-get install -y build-essential
