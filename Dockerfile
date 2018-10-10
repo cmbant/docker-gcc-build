@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:devel
 
 MAINTAINER Antony Lewis
 
