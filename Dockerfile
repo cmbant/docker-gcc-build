@@ -5,7 +5,10 @@ MAINTAINER Antony Lewis
 RUN apt-get update && apt-get install -y \
      build-essential \
      git \
+     liblapack-dev \
+     libopenblas-dev \
      openmpi-bin \
+     libopenmpi-dev \
  && apt-get clean
 
 ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/master gcc_shortlog
@@ -29,6 +32,6 @@ RUN buildDeps='wget unzip bison flex libmpc-dev g++ ' \
  && ldconfig \
  && apt-get purge -y --auto-remove $buildDeps \
  && apt-get update \
- && apt-get install -y build-essential liblapack-dev libopenblas-dev libopenmpi-dev \
+ && apt-get install -y build-essential \
  && apt-get clean \
  && gcc --version
