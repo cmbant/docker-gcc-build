@@ -1,12 +1,12 @@
 ### Overview
 
-This repository has the Dockerfile for source build of gcc 7.
+This repository has the Dockerfile for source build of gcc 9.
 
 Currently gcc 6+ is required to run many Fortran 2003/2008 programs successfully due
 to bugs in earlier versions. Also includes standard openmpi and lapack libraries,
 plus basic build tools.
 
-There are gcc6 and gcc8 branches for the latest stable other versions.. 
+There are gcc6, gcc7, gcc8 branches for the latest stable other versions. 
 The devel branch has the latest master build (at time of Docker build).
 
 Corresponding auto-build docker available at
