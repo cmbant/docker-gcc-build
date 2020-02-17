@@ -1,8 +1,6 @@
 FROM sourceryinstitute/docker-base:latest
 
-MAINTAINER Izaak "Zaak" Beekman <contact@izaakbeekman.com>
-
-ENV REFRESHED_AT 2016-12-07
+ENV REFRESHED_AT 2020-02-17
 COPY NOTICE /NOTICE
 
 # Build-time metadata as defined at http://label-schema.org
@@ -12,15 +10,15 @@ COPY NOTICE /NOTICE
     ARG VCS_VERSION=latest
     LABEL org.label-schema.schema-version="1.0" \
     	  org.label-schema.build-date="$BUILD_DATE" \
-          org.label-schema.name="nightly-gcc-trunk-docker-image" \
-          org.label-schema.description="Nightly builds of GCC trunk using docker" \
-          org.label-schema.url="https://github.com/zbeekman/nightly-gcc-trunk-docker-image/" \
+          org.label-schema.name="weekly-gcc-trunk-docker-image" \
+          org.label-schema.description="Weekly builds of GCC/gfortran trunk using docker" \
+          org.label-schema.url="https://github.com/cmbant/docker-gcc-build/tree/weekly" \
           org.label-schema.vcs-ref="$VCS_REF" \
           org.label-schema.vcs-url="$VCS_URL" \
 	  org.label-schema.version="$VCS_VERSION" \
-          org.label-schema.vendor="zbeekman" \
+          org.label-schema.vendor="cmbant" \
           org.label-schema.license="GPL-3.0" \
-          org.label-schema.docker.cmd="docker run -v $(pwd):/virtual/path -i -t zbeekman/nightly-gcc-trunk-docker-image"
+          org.label-schema.docker.cmd="docker run -v $(pwd):/virtual/path -i -t cmbant/docker-gcc-build:weekly"
 
 
 
@@ -35,7 +33,7 @@ RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison 
         see https://github.com/zbeekman/nightly-gcc-trunk-docker-image/blob/master/LICENSE for the full GPL-v3 license\n\n\n" > /etc/motd \
     && echo "$DEBIAN_FRONTEND" "$transientBuildDeps" \
     && apt-get update \
-    && apt-get install -y $transientBuildDeps libisl-dev --no-install-recommends --no-install-suggests \
+    && apt-get install -y $transientBuildDeps libisl-dev liblapack-dev libopenblas-dev openmpi-bin libopenmpi-dev --no-install-recommends --no-install-suggests \
     && git clone --depth=1 --single-branch --branch master git://gcc.gnu.org/git/gcc.git gcc \
     && cd gcc \
     && mkdir objdir \
@@ -55,6 +53,7 @@ RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison 
     && update-alternatives --install /usr/bin/cc cc /usr/local/bin/gcc 999 \
     && apt-get purge -y --auto-remove $transientBuildDeps \
     && rm -rf /var/lib/apt/lists/* /var/log/* /tmp/*
+
 
 ENTRYPOINT ["/bin/bash"]
 
