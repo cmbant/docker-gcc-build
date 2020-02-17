@@ -1,35 +1,7 @@
 FROM sourceryinstitute/docker-base:latest
 
-COPY NOTICE /NOTICE
-
-# Build-time metadata as defined at http://label-schema.org
-    ARG BUILD_DATE
-    ARG VCS_REF
-    ARG VCS_URL
-    ARG VCS_VERSION=latest
-    LABEL org.label-schema.schema-version="1.0" \
-    	  org.label-schema.build-date="$BUILD_DATE" \
-          org.label-schema.name="weekly-gcc-trunk-docker-image" \
-          org.label-schema.description="Weekly builds of GCC/gfortran trunk using docker" \
-          org.label-schema.url="https://github.com/cmbant/docker-gcc-build/tree/weekly" \
-          org.label-schema.vcs-ref="$VCS_REF" \
-          org.label-schema.vcs-url="$VCS_URL" \
-	  org.label-schema.version="$VCS_VERSION" \
-          org.label-schema.vendor="cmbant" \
-          org.label-schema.license="GPL-3.0" \
-          org.label-schema.docker.cmd="docker run -v $(pwd):/virtual/path -i -t cmbant/docker-gcc-build:devel"
-
-
-
 RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison flex libmpc-dev" \
     && set -v \
-    && printf "\
-        nightly-gcc-trunk-docker-image  Copyright (C) 2016  Izaak B. Beekman\n\
-        This program comes with ABSOLUTELY NO WARRANTY.\n\
-        This is free software, and you are welcome to redistribute it\n\
-        under certain conditions.\n\
-        \n\
-        see https://github.com/zbeekman/nightly-gcc-trunk-docker-image/blob/master/LICENSE for the full GPL-v3 license\n\n\n" > /etc/motd \
     && echo "$DEBIAN_FRONTEND" "$transientBuildDeps" \
     && apt-get update \
     && apt-get install -y $transientBuildDeps libisl-dev liblapack-dev libopenblas-dev openmpi-bin libopenmpi-dev --no-install-recommends --no-install-suggests \
