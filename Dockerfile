@@ -1,6 +1,5 @@
 FROM sourceryinstitute/docker-base:latest
 
-ENV REFRESHED_AT 2020-02-17
 COPY NOTICE /NOTICE
 
 # Build-time metadata as defined at http://label-schema.org
@@ -18,7 +17,7 @@ COPY NOTICE /NOTICE
 	  org.label-schema.version="$VCS_VERSION" \
           org.label-schema.vendor="cmbant" \
           org.label-schema.license="GPL-3.0" \
-          org.label-schema.docker.cmd="docker run -v $(pwd):/virtual/path -i -t cmbant/docker-gcc-build:weekly"
+          org.label-schema.docker.cmd="docker run -v $(pwd):/virtual/path -i -t cmbant/docker-gcc-build:devel"
 
 
 
@@ -55,6 +54,3 @@ RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison 
     && rm -rf /var/lib/apt/lists/* /var/log/* /tmp/*
 
 
-ENTRYPOINT ["/bin/bash"]
-
-CMD ["-l"]
