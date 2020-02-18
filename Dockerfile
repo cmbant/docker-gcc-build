@@ -1,5 +1,23 @@
 FROM sourceryinstitute/docker-base:latest
 
+ARG BUILD_DATE
+ARG IMAGE_NAME
+ARG SOURCE_BRANCH
+ARG SOURCE_COMMIT
+
+ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/master gcc_shortlog
+
+LABEL org.label-schema.schema-version="1.0" \
+	  org.label-schema.build-date="$BUILD_DATE" \
+      org.label-schema.name="docker-gcc-build" \
+      org.label-schema.description="GCC and gfortran $SOURCE_BRANCH build using docker" \
+      org.label-schema.url="https://github.com/cmbant/docker-gcc-build/tree/$SOURCE_BRANCH" \
+  org.label-schema.version="$SOURCE_COMMIT" \
+      org.label-schema.vendor="cmbant" \
+      org.label-schema.license="GPL-3.0" \
+      org.label-schema.docker.cmd="docker run -v $(pwd):/virtual/path -i -t $IMAGE_NAME /bin/bash"
+
+
 RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison flex libmpc-dev" \
     && set -v \
     && echo "$DEBIAN_FRONTEND" "$transientBuildDeps" \
