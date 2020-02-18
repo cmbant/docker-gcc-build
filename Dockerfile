@@ -1,4 +1,6 @@
-FROM sourceryinstitute/docker-base:latest
+FROM debian:stable-slim
+
+MAINTAINER Antony Lewis
 
 ARG BUILD_DATE
 ARG IMAGE_NAME
@@ -24,7 +26,10 @@ RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison 
     && set -v \
     && echo "$DEBIAN_FRONTEND" "$transientBuildDeps" \
     && apt-get update \
-    && apt-get install -y $transientBuildDeps libisl-dev liblapack-dev libopenblas-dev openmpi-bin libopenmpi-dev build-essential --no-install-recommends --no-install-suggests \
+    && apt-get install -y $transientBuildDeps \
+       build-essential git wget sudo cmake libtool ca-certificates openssh-client gcc g++ \
+       libisl-dev liblapack-dev libopenblas-dev openmpi-bin libopenmpi-dev \
+       --no-install-recommends --no-install-suggests \
     && git clone --depth=1 --single-branch --branch $GCC_BRANCH git://gcc.gnu.org/git/gcc.git gcc \
     && cd gcc \
     && mkdir objdir \
@@ -40,7 +45,6 @@ RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison 
     && ldconfig -v\
     && dpkg-divert --divert /usr/bin/gcc.orig --rename /usr/bin/gcc \
     && dpkg-divert --divert /usr/bin/g++.orig --rename /usr/bin/g++ \
-    && dpkg-divert --divert /usr/bin/gfortran.orig --rename /usr/bin/gfortran \
     && update-alternatives --install /usr/bin/cc cc /usr/local/bin/gcc 999 \
     && apt-get purge -y --auto-remove $transientBuildDeps \
     && rm -rf /var/lib/apt/lists/* /var/log/* /tmp/*
