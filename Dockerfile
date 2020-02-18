@@ -46,3 +46,6 @@ RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison 
     && rm -rf /var/lib/apt/lists/* /var/log/* /tmp/*
 
 
+#Match conventions to the other cmbant gcc images (gcc6, gcc7 etc)
+ENTRYPOINT []
+CMD []
