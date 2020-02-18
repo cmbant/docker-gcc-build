@@ -1,3 +1,0 @@
-curl -H "Content-Type: application/json" \
-  --data '{"source_type": "Branch", "source_name": "$SOURCE_BRANCH"}' \
-  -X POST "https://hub.docker.com/api/build/v1/source/8cee15dc-5480-493d-83f0-71131a3ad2be/trigger/1eb834ea-92fe-4179-a6f4-2e60c22f77b3/call/"
