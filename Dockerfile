@@ -7,7 +7,7 @@ ARG IMAGE_NAME
 ARG SOURCE_BRANCH
 ARG SOURCE_COMMIT
 
-ARG GCC_BRANCH=releases/gcc-10
+ARG GCC_BRANCH=releases/gcc-11
 
 ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/$GCC_BRANCH gcc_shortlog
 
@@ -38,7 +38,7 @@ RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison 
        --disable-bootstrap --build=x86_64-linux-gnu \
     && make -j"$(nproc)" \
     && make install-strip \
-    && make distclean \
+    && make distclean || true \
     && cd ../.. \
     && rm -rf ./gcc \
     && echo '/usr/local/lib64' > /etc/ld.so.conf.d/local-lib64.conf \

@@ -1,2 +1,2 @@
-docker build -t cmbant/docker-gcc-build:gcc10 . > build.log
-docker push cmbant/docker-gcc-build:gcc10
+docker build -t cmbant/docker-gcc-build:gcc11 . > build.log
+docker push cmbant/docker-gcc-build:gcc11
