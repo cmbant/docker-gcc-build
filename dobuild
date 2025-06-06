@@ -1,2 +1,5 @@
 docker build -t cmbant/docker-gcc-build:devel . > build.log
 docker push cmbant/docker-gcc-build:devel
+
+
+# docker run -v /local/code/source:/virtual/path -i -t cmbant/docker-gcc-build /bin/bash
