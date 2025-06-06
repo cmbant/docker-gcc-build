@@ -1,2 +1,2 @@
-FROM cmbant/docker-gcc-build:gcc9
+FROM cmbant/docker-gcc-build:gcc15
 
