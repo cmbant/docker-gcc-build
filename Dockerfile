@@ -7,7 +7,7 @@ ARG IMAGE_NAME
 ARG SOURCE_BRANCH
 ARG SOURCE_COMMIT
 
-ARG GCC_BRANCH=releases/gcc-11
+ARG GCC_BRANCH=releases/gcc-15
 
 ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/$GCC_BRANCH gcc_shortlog
 
