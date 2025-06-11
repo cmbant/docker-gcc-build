@@ -1,10 +1,8 @@
 ### Overview
 
-This repository has the Dockerfile for source build of gcc 15.
+This repository has the Dockerfile for source build of gcc 15 with gfortran.
 
-Currently gcc 6+ is required to run many Fortran 2003/2008 programs successfully due
-to bugs in earlier versions. Also includes standard openmpi and lapack libraries,
-plus basic build tools.
+Also includes standard openmpi and lapack libraries, valgrind, and basic build tools.
 
 The devel branch has the latest master build (at time of Docker build).
 
