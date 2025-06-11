@@ -47,7 +47,7 @@ RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison 
     && dpkg-divert --divert /usr/bin/g++.orig --rename /usr/bin/g++ \
     && update-alternatives --install /usr/bin/cc cc /usr/local/bin/gcc 999 \
     && apt-get purge -y --auto-remove $transientBuildDeps \
-    && apt-get install -y build-essential \
+    && apt-get install -y build-essential valgrind \
     && rm -rf /var/lib/apt/lists/* /var/log/* /tmp/*
 
 
