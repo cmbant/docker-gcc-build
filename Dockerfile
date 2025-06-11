@@ -1,6 +1,6 @@
 FROM debian:stable-slim
 
-MAINTAINER Antony Lewis
+LABEL maintainer="Antony Lewis"
 
 ARG BUILD_DATE
 ARG IMAGE_NAME
@@ -11,15 +11,16 @@ ARG GCC_BRANCH=master
 
 ADD https://gcc.gnu.org/git/?p=gcc.git;a=shortlog;h=refs/heads/$GCC_BRANCH gcc_shortlog
 
-LABEL org.label-schema.schema-version="1.0" \
-	  org.label-schema.build-date="$BUILD_DATE" \
-      org.label-schema.name="docker-gcc-build" \
-      org.label-schema.description="GCC and gfortran source $GCC_BRANCH build ($BUILD_DATE)" \
-      org.label-schema.url="https://github.com/cmbant/docker-gcc-build/tree/$SOURCE_BRANCH" \
-      org.label-schema.version="$SOURCE_COMMIT" \
-      org.label-schema.vendor="cmbant" \
-      org.label-schema.license="GPL-3.0" \
-      org.label-schema.docker.cmd="docker run -v $(pwd):/virtual/path -i -t $IMAGE_NAME /bin/bash"
+# Updated to use newer label schema
+LABEL org.opencontainers.image.created="$BUILD_DATE" \
+      org.opencontainers.image.title="docker-gcc-build" \
+      org.opencontainers.image.description="GCC and gfortran source $GCC_BRANCH build ($BUILD_DATE)" \
+      org.opencontainers.image.url="https://github.com/cmbant/docker-gcc-build/tree/$SOURCE_BRANCH" \
+      org.opencontainers.image.version="$SOURCE_COMMIT" \
+      org.opencontainers.image.vendor="cmbant" \
+      org.opencontainers.image.licenses="GPL-3.0" \
+      org.opencontainers.image.source="https://github.com/cmbant/docker-gcc-build"
+
 
 
 RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison flex libmpc-dev" \
@@ -47,10 +48,10 @@ RUN DEBIAN_FRONTEND=noninteractive transientBuildDeps="dpkg-dev apt-utils bison 
     && dpkg-divert --divert /usr/bin/g++.orig --rename /usr/bin/g++ \
     && update-alternatives --install /usr/bin/cc cc /usr/local/bin/gcc 999 \
     && apt-get purge -y --auto-remove $transientBuildDeps \
-    && apt-get install -y build-essential \
+    && apt-get install -y build-essential valgrind \
     && rm -rf /var/lib/apt/lists/* /var/log/* /tmp/*
 
 
-#Match conventions to the other cmbant gcc images (gcc6, gcc7 etc)
+#Match conventions to the other cmbant gcc images
 ENTRYPOINT []
 CMD []
